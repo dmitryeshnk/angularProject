@@ -1,0 +1,37 @@
+<div>
+
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Username</th>
+        <th scope="col">Email</th>
+        <th scope="col">Password</th>
+        <th scope="col">Birthday</th>
+        <th scope="col">Gender</th>
+        <th scope="col">Roles</th>
+        <th scope="col">Assign role</th>
+        <th scope="col">Edit</th>
+        <th scope="col">Delete</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let user of users">
+          <td>{{user.id}}</td>
+          <td>{{user.username}}</td>
+          <td>{{user.email}}</td>
+          <td>{{user.password}}</td>
+          <td>{{user.birthday | date}}</td>
+          <td>{{user.gender.name}}</td>
+          <td><div *ngFor="let role of user.roles">{{role.name}}</div></td>
+          <td><button (click)="change(user)" class="btn btn-primary">change</button></td>
+          <td><button (click)="edit(user)" class="btn btn-primary">edit</button></td>
+          <td><button (click)="delete(user)" class="btn btn-primary">Delete</button></td>
+        </tr>
+    </tbody>
+</table>
+<button (click)="add()" class="btn btn-primary">Add</button>
+<edit-comp [isVisible]="isVisibleEdit" (onChanged)="onChanged()"></edit-comp>
+
+<add-comp [isVisible]="isVisibleAdd" (onChanged)="onChanged()"></add-comp>
+</div>

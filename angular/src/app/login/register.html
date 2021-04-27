@@ -1,0 +1,60 @@
+<form [ngClass]="{invisible: !isVisible}" [formGroup]="registerForm" novalidate (ngSubmit)="submit()">
+  <div class="form-group">
+      <label>username</label>
+      <input class="form-control" name="name" formControlName="username" />
+
+      <div class="alert alert-danger"
+          *ngIf="registerForm.controls['username'].invalid && registerForm.controls['username'].touched">
+          Must not be empty
+      </div>
+  </div>
+  <div class="form-group">
+      <label>Email</label>
+      <input class="form-control" name="email" formControlName="email" />
+
+      <div class="alert alert-danger"
+          *ngIf="registerForm.controls['email'].invalid && registerForm.controls['email'].touched">
+          Invalid email
+      </div>
+  </div>
+  <div class="form-group">
+      <label>password</label>
+      <input type="password" class="form-control" name="password" formControlName="password" />
+      <div class="alert alert-danger"
+          *ngIf="registerForm.controls['password'].invalid && registerForm.controls['password'].touched">
+          Must not be empty
+      </div>
+  </div>
+  <div class="form-group">
+      <label>birthday</label>
+      <input type="date" class="form-control" name="birthday" formControlName="birthday" [max]="max"/>
+      <div class="alert alert-danger"
+          *ngIf="registerForm.controls['birthday'].invalid && registerForm.controls['birthday'].touched">
+          Must not be empty and be past time
+      </div>
+  </div>
+  <div class="form-group">
+      <label>Gender</label>
+      <select class="form-control" name="gender" formControlName="gender">
+        <option value="1">Male</option>
+        <option value="2">Female</option>
+      </select>
+      <div class="alert alert-danger"
+          *ngIf="registerForm.controls['gender'].invalid">
+          Must not be empty
+      </div>
+  </div>
+  <div class="form-group">
+    <re-captcha formControlName="recaptcha" required></re-captcha>
+    <div class="alert alert-danger"
+        *ngIf="registerForm.controls['recaptcha'].invalid && registerForm.controls['recaptcha'].touched">
+        Must not be empty
+    </div>
+  </div>
+  <div class="form-group">
+      <input type="submit" [disabled]="registerForm.invalid" class="btn btn-default" value="Send" />
+  </div>
+  <div class="form-group">
+    <button type="button" name="button" (click)="login()">Login</button>
+  </div>
+</form>`

@@ -1,0 +1,31 @@
+version: '3.0'
+services:
+ h2:
+  image: buildo/h2database:latest
+  container_name: yeshenko-database
+  restart: always
+  volumes:
+   - ./src/database:/h2-data
+  ports:
+   - "1521:1521"
+ app:
+  build: .
+  image: 23_angular:latest
+  container_name: yeshenko-spring
+  restart: always
+  depends_on: 
+   - h2
+  links:
+   - h2
+  ports:
+   - "8080:8080"
+ 
+ angular:
+  build: ./angular
+  image: angular:latest
+  container_name: yeshenko-angular
+  restart: always
+  ports:
+   - 4200:80
+  links:
+   - app
